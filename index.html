@@ -3,13 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TRANTIBUM MAP KUANSING - Satpol PP</title>
+  <title>TRANTIBUM MAP KUANSING</title>
 
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-  
-  <!-- Leaflet Control Geocoder (Search Bar) CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <!-- Leaflet CSS Resmi -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
   <style>
     * {
@@ -17,23 +14,25 @@
       margin: 0;
       padding: 0;
     }
-
     html, body {
-      height: 100%;
       width: 100%;
+      height: 100%;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
     }
-
     #map {
-      height: 100vh;
-      width: 100vw;
-      min-height: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #e5e3df;
       z-index: 1;
     }
-
     /* Panel Judul */
     .title-panel {
       position: absolute;
@@ -41,96 +40,80 @@
       left: 60px;
       z-index: 1000;
       background: rgba(255, 255, 255, 0.95);
-      padding: 10px 18px;
+      padding: 10px 16px;
       border-radius: 8px;
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
       border-left: 5px solid #d9534f;
     }
-
     .title-panel h1 {
       margin: 0;
-      font-size: 16px;
+      font-size: 15px;
       color: #2c3e50;
       font-weight: 700;
     }
-
     .title-panel p {
-      margin: 3px 0 0;
-      font-size: 12px;
-      color: #555555;
+      margin: 2px 0 0;
+      font-size: 11px;
+      color: #555;
     }
-
     /* Legenda */
     .legend {
       background: #ffffff;
-      padding: 12px;
+      padding: 10px 14px;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       font-size: 12px;
       line-height: 1.6;
-      color: #333333;
+      color: #333;
     }
-
     .legend h4 {
-      margin: 0 0 6px 0;
-      font-size: 13px;
+      margin: 0 0 5px 0;
+      font-size: 12px;
       font-weight: bold;
-      border-bottom: 1px solid #e0e0e0;
-      padding-bottom: 4px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 3px;
     }
-
     .legend-row {
       display: flex;
       align-items: center;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
-
     .legend-color {
       width: 12px;
       height: 12px;
       border-radius: 50%;
       display: inline-block;
       margin-right: 8px;
-      border: 1px solid rgba(0, 0, 0, 0.2);
     }
-
-    /* Popup Box & Foto */
+    /* Popup */
     .popup-box {
-      width: 230px;
+      width: 220px;
       font-size: 12px;
       line-height: 1.45;
-      color: #333333;
     }
-
     .popup-box img {
       width: 100%;
-      height: 130px;
+      height: 120px;
       object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 8px;
-      border: 1px solid #e0e0e0;
+      border-radius: 5px;
+      margin-bottom: 6px;
+      border: 1px solid #ddd;
       display: block;
     }
-
     .popup-box h4 {
-      margin: 0 0 5px 0;
+      margin: 0 0 4px 0;
       font-size: 13px;
       color: #1a252f;
-      border-bottom: 2px solid #eeeeee;
-      padding-bottom: 4px;
     }
-
-    .status-badge {
+    .badge {
       display: inline-block;
-      padding: 2px 8px;
-      border-radius: 10px;
+      padding: 2px 6px;
+      border-radius: 8px;
       font-size: 10px;
       font-weight: bold;
-      color: #ffffff;
-      margin-bottom: 6px;
-      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 5px;
     }
-
     .badge-tinggi { background-color: #d9534f; }
     .badge-sedang { background-color: #f0ad4e; }
     .badge-rendah { background-color: #5cb85c; }
@@ -138,203 +121,170 @@
 </head>
 <body>
 
-  <!-- Panel Judul WebGIS -->
   <div class="title-panel">
     <h1>TRANTIBUM MAP KUANSING</h1>
-    <p>Peta Kerawanan Trantibum - Kab. Kuantan Singingi</p>
+    <p>Peta Kerawanan Trantibum - Satpol PP Kuansing</p>
   </div>
 
-  <!-- Kontainer Peta -->
   <div id="map"></div>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-  <!-- Leaflet Control Geocoder JS -->
-  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <!-- Leaflet JS Resmi -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    // Pastikan DOM sudah siap
-    document.addEventListener("DOMContentLoaded", function () {
-      // 1. Inisialisasi Peta (Pusat Kota Teluk Kuantan)
-      const map = L.map('map').setView([-0.5317, 101.5583], 14);
-
-      // 2. Basemap Options
-      const osmLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(map);
-
-      const googleRoads = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-        attribution: '&copy; Google Maps'
-      });
-
-      const googleHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
-        maxZoom: 20,
-        subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
-        attribution: '&copy; Google Hybrid'
-      });
-
-      // 3. Layer Groups Kerawanan
-      const layerTinggi = L.layerGroup().addTo(map);
-      const layerSedang = L.layerGroup().addTo(map);
-      const layerRendah = L.layerGroup().addTo(map);
-
-      // 4. Data Titik Kerawanan
-      const daftarTitikKuansing = [
-        {
-          nama: "Pasar Tradisional Teluk Kuantan",
-          lat: -0.5306,
-          lng: 101.5645,
-          radiusMeter: 350,
-          tingkat: "Tinggi",
-          foto: "img/pasar.jpeg",
-          potensi: "PKL Meluber ke Badan Jalan & Parkir Liar",
-          waktu: "Pagi & Sore (06.30 - 10.00 WIB)",
-          tindakan: "Patroli Penataan & Pengawasan Rutin",
-          status: "Perlu Pengawasan Intensif"
-        },
-        {
-          nama: "Taman Jalur / Tepian Narosa",
-          lat: -0.5321,
-          lng: 101.5630,
-          radiusMeter: 250,
-          tingkat: "Sedang",
-          foto: null,
-          potensi: "Aktivitas Pengamen/PMKS & Sampah Liar",
-          waktu: "Malam Hari (19.30 - 23.00 WIB)",
-          tindakan: "Patroli Dialogis Humanis",
-          status: "Terkendali / Monitoring Rutin"
-        },
-        {
-          nama: "Kompleks Perkantoran Pemkab Kuansing",
-          lat: -0.5480,
-          lng: 101.5680,
-          radiusMeter: 400,
-          tingkat: "Rendah",
-          foto: null,
-          potensi: "Monitoring Kepatuhan Disiplin Jam Kerja",
-          waktu: "Jam Kerja (09.00 - 11.30 WIB)",
-          tindakan: "Monitoring Berkala Penegakan Perda",
-          status: "Aman Terpantau"
-        }
-      ];
-
-      function ambilWarna(tingkat) {
-        if (tingkat === 'Tinggi') return '#d9534f';
-        if (tingkat === 'Sedang') return '#f0ad4e';
-        if (tingkat === 'Rendah') return '#5cb85c';
-        return '#3388ff';
-      }
-
-      function ambilBadge(tingkat) {
-        if (tingkat === 'Tinggi') return 'badge-tinggi';
-        if (tingkat === 'Sedang') return 'badge-sedang';
-        if (tingkat === 'Rendah') return 'badge-rendah';
-        return '';
-      }
-
-      // 5. Render Marker & Radius
-      daftarTitikKuansing.forEach(item => {
-        const warna = ambilWarna(item.tingkat);
-
-        const zonaRadius = L.circle([item.lat, item.lng], {
-          radius: item.radiusMeter,
-          color: warna,
-          weight: 1.5,
-          fillColor: warna,
-          fillOpacity: 0.25
-        });
-
-        const titikPusat = L.circleMarker([item.lat, item.lng], {
-          radius: 6,
-          color: '#ffffff',
-          weight: 2,
-          fillColor: warna,
-          fillOpacity: 1
-        });
-
-        const imgTag = item.foto ? `<img src="${item.foto}" alt="${item.nama}" onerror="this.style.display='none'" />` : '';
-
-        const popupIsi = `
-          <div class="popup-box">
-            ${imgTag}
-            <span class="status-badge ${ambilBadge(item.tingkat)}">Rawan ${item.tingkat}</span>
-            <h4>${item.nama}</h4>
-            <b>Radius Terdampak:</b> ±${item.radiusMeter} Meter<br>
-            <b>Potensi:</b> ${item.potensi}<br>
-            <b>Waktu:</b> ${item.waktu}<br>
-            <b>Tindakan:</b> ${item.tindakan}<br>
-            <b>Status:</b> <i>${item.status}</i>
-          </div>
-        `;
-
-        zonaRadius.bindPopup(popupIsi);
-        titikPusat.bindPopup(popupIsi);
-
-        let targetLayer;
-        if (item.tingkat === "Tinggi") targetLayer = layerTinggi;
-        else if (item.tingkat === "Sedang") targetLayer = layerSedang;
-        else if (item.tingkat === "Rendah") targetLayer = layerRendah;
-
-        zonaRadius.addTo(targetLayer);
-        titikPusat.addTo(targetLayer);
-      });
-
-      // 6. Kontrol Layer Pilihan Basemap & Kategori
-      const baseMaps = {
-        "OpenStreetMap (Default)": osmLayer,
-        "Google Peta Jalan": googleRoads,
-        "Google Satelit Hybrid": googleHybrid
-      };
-
-      const overlayMaps = {
-        "<span style='color:#d9534f; font-weight:bold;'>● Zona Rawan Tinggi</span>": layerTinggi,
-        "<span style='color:#f0ad4e; font-weight:bold;'>● Zona Rawan Sedang</span>": layerSedang,
-        "<span style='color:#5cb85c; font-weight:bold;'>● Zona Rawan Rendah</span>": layerRendah
-      };
-
-      L.control.layers(baseMaps, overlayMaps, { collapsed: false, position: 'topright' }).addTo(map);
-
-      // 7. Search Bar
-      L.Control.geocoder({
-        defaultMarkGeocode: false,
-        position: 'topleft',
-        placeholder: 'Cari lokasi / jalan...'
-      })
-      .on('markgeocode', function(e) {
-        const bbox = e.geocode.bbox;
-        const poly = L.polygon([
-          bbox.getSouthEast(),
-          bbox.getNorthEast(),
-          bbox.getNorthWest(),
-          bbox.getSouthWest()
-        ]);
-        map.fitBounds(poly.getBounds());
-
-        L.popup()
-          .setLatLng(e.geocode.center)
-          .setContent("<b>Hasil Pencarian:</b><br>" + e.geocode.name)
-          .openOn(map);
-      })
-      .addTo(map);
-
-      // 8. Legenda Status
-      const legendControl = L.control({ position: 'bottomright' });
-      legendControl.onAdd = function () {
-        const div = L.DomUtil.create('div', 'legend');
-        div.innerHTML = `
-          <h4>Zona Kerawanan</h4>
-          <div class="legend-row"><span class="legend-color" style="background:#d9534f;"></span> Radius Tinggi (Prioritas)</div>
-          <div class="legend-row"><span class="legend-color" style="background:#f0ad4e;"></span> Radius Sedang (Pengawasan)</div>
-          <div class="legend-row"><span class="legend-color" style="background:#5cb85c;"></span> Radius Rendah (Monitoring)</div>
-        `;
-        return div;
-      };
-      legendControl.addTo(map);
+    // 1. Buat Peta
+    var map = L.map('map', {
+      center: [-0.5317, 101.5583],
+      zoom: 14
     });
+
+    // 2. Basemap Google Maps Roads & OSM
+    var googleRoads = L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      attribution: '&copy; Google Maps'
+    }).addTo(map);
+
+    var googleHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      attribution: '&copy; Google Satellite'
+    });
+
+    var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap'
+    });
+
+    // 3. Layer Groups
+    var layerTinggi = L.layerGroup().addTo(map);
+    var layerSedang = L.layerGroup().addTo(map);
+    var layerRendah = L.layerGroup().addTo(map);
+
+    // 4. Data Titik
+    var daftarTitik = [
+      {
+        nama: "Pasar Tradisional Teluk Kuantan",
+        lat: -0.5306,
+        lng: 101.5645,
+        radius: 350,
+        tingkat: "Tinggi",
+        foto: "img/pasar.jpeg",
+        potensi: "PKL Meluber ke Badan Jalan & Parkir Liar",
+        waktu: "Pagi & Sore (06.30 - 10.00 WIB)",
+        tindakan: "Patroli Penataan & Pengawasan Rutin",
+        status: "Perlu Pengawasan Intensif"
+      },
+      {
+        nama: "Taman Jalur / Tepian Narosa",
+        lat: -0.5321,
+        lng: 101.5630,
+        radius: 250,
+        tingkat: "Sedang",
+        foto: null,
+        potensi: "Aktivitas Pengamen/PMKS & Sampah Liar",
+        waktu: "Malam Hari (19.30 - 23.00 WIB)",
+        tindakan: "Patroli Dialogis Humanis",
+        status: "Terkendali"
+      },
+      {
+        nama: "Kompleks Perkantoran Pemkab Kuansing",
+        lat: -0.5480,
+        lng: 101.5680,
+        radius: 400,
+        tingkat: "Rendah",
+        foto: null,
+        potensi: "Monitoring Kepatuhan Disiplin Jam Kerja",
+        waktu: "Jam Kerja (09.00 - 11.30 WIB)",
+        tindakan: "Monitoring Berkala Penegakan Perda",
+        status: "Aman Terpantau"
+      }
+    ];
+
+    function getWarna(tingkat) {
+      if (tingkat === 'Tinggi') return '#d9534f';
+      if (tingkat === 'Sedang') return '#f0ad4e';
+      return '#5cb85c';
+    }
+
+    function getBadge(tingkat) {
+      if (tingkat === 'Tinggi') return 'badge-tinggi';
+      if (tingkat === 'Sedang') return 'badge-sedang';
+      return 'badge-rendah';
+    }
+
+    // 5. Tambahkan Titik & Radius
+    daftarTitik.forEach(function(item) {
+      var warna = getWarna(item.tingkat);
+
+      var zona = L.circle([item.lat, item.lng], {
+        radius: item.radius,
+        color: warna,
+        weight: 1.5,
+        fillColor: warna,
+        fillOpacity: 0.25
+      });
+
+      var titik = L.circleMarker([item.lat, item.lng], {
+        radius: 6,
+        color: '#ffffff',
+        weight: 2,
+        fillColor: warna,
+        fillOpacity: 1
+      });
+
+      var imgHtml = item.foto ? '<img src="' + item.foto + '" alt="' + item.nama + '" onerror="this.style.display=\'none\'" />' : '';
+
+      var isiPopup = '<div class="popup-box">' +
+        imgHtml +
+        '<span class="badge ' + getBadge(item.tingkat) + '">Rawan ' + item.tingkat + '</span>' +
+        '<h4>' + item.nama + '</h4>' +
+        '<b>Radius:</b> ±' + item.radius + ' Meter<br>' +
+        '<b>Potensi:</b> ' + item.potensi + '<br>' +
+        '<b>Waktu:</b> ' + item.waktu + '<br>' +
+        '<b>Tindakan:</b> ' + item.tindakan + '<br>' +
+        '<b>Status:</b> <i>' + item.status + '</i>' +
+        '</div>';
+
+      zona.bindPopup(isiPopup);
+      titik.bindPopup(isiPopup);
+
+      if (item.tingkat === "Tinggi") {
+        zona.addTo(layerTinggi);
+        titik.addTo(layerTinggi);
+      } else if (item.tingkat === "Sedang") {
+        zona.addTo(layerSedang);
+        titik.addTo(layerSedang);
+      } else {
+        zona.addTo(layerRendah);
+        titik.addTo(layerRendah);
+      }
+    });
+
+    // 6. Kontrol Layer
+    var baseMaps = {
+      "Google Peta Jalan": googleRoads,
+      "Google Satelit": googleHybrid,
+      "OpenStreetMap": osmLayer
+    };
+
+    var overlayMaps = {
+      "<span style='color:#d9534f; font-weight:bold;'>● Zona Rawan Tinggi</span>": layerTinggi,
+      "<span style='color:#f0ad4e; font-weight:bold;'>● Zona Rawan Sedang</span>": layerSedang,
+      "<span style='color:#5cb85c; font-weight:bold;'>● Zona Rawan Rendah</span>": layerRendah
+    };
+
+    L.control.layers(baseMaps, overlayMaps, { collapsed: false, position: 'topright' }).addTo(map);
+
+    // 7. Legenda
+    var legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function () {
+      var div = L.DomUtil.create('div', 'legend');
+      div.innerHTML = '<h4>Zona Kerawanan</h4>' +
+        '<div class="legend-row"><span class="legend-color" style="background:#d9534f;"></span> Tinggi (Prioritas)</div>' +
+        '<div class="legend-row"><span class="legend-color" style="background:#f0ad4e;"></span> Sedang (Pengawasan)</div>' +
+        '<div class="legend-row"><span class="legend-color" style="background:#5cb85c;"></span> Rendah (Monitoring)</div>';
+      return div;
+    };
+    legend.addTo(map);
   </script>
 </body>
 </html>
